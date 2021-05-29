@@ -1,7 +1,51 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "pureblue-ng-style-guide": {
+      "projectType": "library",
+      "root": "projects/pureblue-ng-style-guide",
+      "sourceRoot": "projects/pureblue-ng-style-guide/src",
+      "prefix": "nk",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/pureblue-ng-style-guide/tsconfig.lib.json",
+            "project": "projects/pureblue-ng-style-guide/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/pureblue-ng-style-guide/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/pureblue-ng-style-guide/src/test.ts",
+            "tsConfig": "projects/pureblue-ng-style-guide/tsconfig.spec.json",
+            "karmaConfig": "projects/pureblue-ng-style-guide/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/pureblue-ng-style-guide/tsconfig.lib.json",
+              "projects/pureblue-ng-style-guide/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "pureblue-ng-style-guide"
 }
